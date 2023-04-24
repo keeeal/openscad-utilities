@@ -1,0 +1,5 @@
+# Tests directory
+tests/*
+
+# CAD models
+*.stl
