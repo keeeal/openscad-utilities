@@ -1,5 +1,5 @@
 
-use <simple-gear.scad>
+use <simple.scad>
 
 module herringbone_gear(height, teeth, twist=0, center=false) {
     // Twist is defined such that two gears with the same twist will fit
