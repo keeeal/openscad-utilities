@@ -1,15 +1,15 @@
+SHELL:=/bin/bash -O globstar
 
-test: write-include-tests
-	for f in tests/*.scad; do \
-		docker run -v ${PWD}:/utils openscad/openscad:latest \
-		openscad -o _.stl /utils/$$f || exit 1; \
-	done
-
-write-include-tests:
-	mkdir -p tests
-	for f in *.scad; do \
-		echo "include <../$$f>; cube();" > tests/test-include-$$f; \
+test:
+	for f in **/*.scad; do \
+		echo -n "test: include <$$f>... "; \
+		testfile=_tests/$$(dirname $$f)/include-$$(basename $$f)-test; \
+		mkdir -p _tests/$$(dirname $$f); \
+		echo "include </utils/$$f>; cube();" > $${testfile}; \
+		docker run -v $$(pwd):/utils openscad/openscad:latest \
+		openscad --hardwarnings --quiet -o _.stl /utils/$${testfile} || exit 1; \
+		echo PASSED; \
 	done
 
 clean:
-	rm -rf tests
+	rm -rf _tests
