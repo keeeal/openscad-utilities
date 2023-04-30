@@ -1,5 +1,5 @@
-# Tests directory
-tests/*
+# Tests
+*.scad-test
 
 # CAD models
 *.stl
