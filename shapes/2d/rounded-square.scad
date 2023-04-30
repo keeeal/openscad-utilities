@@ -1,7 +1,7 @@
 
 EPS = 1e-3;
 
-module rounded_square(size, r, center) {
+module rounded_square(size, r, center=false) {
     size = is_list(size) ? size : [size, size];
     r = max(r, EPS);
     dr = center ? 0 : r;
