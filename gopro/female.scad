@@ -1,14 +1,16 @@
 
 use <profile.scad>
 
+EPS = 1e-3;
+
 module gopro_mount_female(length=1, base=false) {
     length = max(length, 1);
     translate([0, 0,-7.85]) linear_extrude(3.1) gopro_mount_profile(length);
     translate([0, 0,-1.55]) linear_extrude(3.1) gopro_mount_profile(length);
     translate([0, 0, 4.75]) linear_extrude(3.1) gopro_mount_profile(length);
-    translate([0, 0, 7.85]) difference() {
+    translate([0, 0, 7.85 - EPS]) difference() {
         cylinder(1.8, 7.5, 6);
-        rotate([0, 0, 30]) cylinder(2, r=4.9, $fn=6);
+        translate([0, 0, -0.1]) rotate([0, 0, 30]) cylinder(2, r=4.9, $fn=6);
     }
     if (base) {
         translate([length, 7.5, 0]) rotate([90, 0, 0])
